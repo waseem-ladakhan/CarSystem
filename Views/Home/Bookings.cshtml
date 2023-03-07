@@ -1,0 +1,81 @@
+﻿@model CarSystem.Models.myBooking
+@{
+    ViewBag.Title = "Bookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bookings</h2>
+
+<h2>My Booking</h2>
+@{
+    string nm = Session["u"].ToString();
+    @* string registrationId = @ViewData["registration"].ToString();*@
+    DateTime bookingDate = DateTime.Now;
+
+}
+@*<h4>registrationId</h4>
+    <input type="text" name="registrationID" value="@ViewData["registration"]" class="form-control" />*@
+<h4>Your Name</h4>
+<label>@nm</label>
+<h4>Booking Date</h4>
+<label>@bookingDate.ToShortDateString()</label>
+<label>Car registration ID: @ViewData["registration"]</label>
+
+
+
+<div style="width:500px">
+    <form method="post">
+        <label>Enter Pick Up location</label>
+
+        @Html.TextBoxFor(c => c.PickOff, new { @class = "form-control" })
+        <span style="color:red;font-weight:bold">@Html.ValidationMessageFor(c => c.PickOff)</span>
+
+
+        <label>Enter Drop location</label>
+        @Html.TextBoxFor(c => c.DropOff, new { @class = "form-control" })
+        <span style="color:red;font-weight:bold">
+            @Html.ValidationMessageFor(c => c.DropOff)
+        </span>
+
+
+        <label>Enter Start Date</label>
+        @Html.TextBoxFor(c => c.startDate, new { @class = "form-control", HtmlAttribute = new { type = "date" } })
+        <span style="color:red;font-weight:bold">
+            @Html.ValidationMessageFor(c => c.startDate)
+        </span>
+
+        <label>Enter Start Date</label>
+        @Html.TextBoxFor(c => c.ReturnDate, new { @class = "form-control", HtmlAttribute = new { type = "date" } })
+        <span style="color:red;font-weight:bold">
+            @Html.ValidationMessageFor(c => c.ReturnDate)
+        </span>
+        <input type="submit" value="Book" class="btn btn-success" />
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+@if (ViewBag.ra > 0)
+{
+
+
+    <div style="background-color:orangered;color:yellow;font-weight:bold">
+        <div>
+            @ViewData["r"]
+        </div>
+
+
+        @Html.ActionLink("Make Payment", "Payment", new { username = Session["u"].ToString() }, new { @class = "btn btn-primary" })
+    </div>
+}
+
+

@@ -1,0 +1,151 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<style>
+
+
+    *, :before, :after {
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        background: #1f2e43;
+        min-width: 275px;
+        height: 100vh;
+        margin: 0 10vw;
+        overflow: hidden;
+        color: #FFFFFF;
+        font-family: Roboto;
+    }
+
+    .wrapper {
+        flex-grow: 2;
+        width: 40vw;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: 100;
+    }
+
+    p {
+        width: 95%;
+        font-size: 1.5em;
+        line-height: 1.4;
+    }
+
+    .buttons {
+        white-space: nowrap;
+        display: inline-block;
+    }
+
+    span {
+        display: block;
+        text-transform: uppercase;
+        color: #B9DDFB;
+        letter-spacing: 1.5px;
+        text-align: center;
+    }
+
+    a.golink {
+        display: inline-block;
+        padding: 0.8em 1em;
+        margin-right: 1em;
+        margin-bottom: 1em;
+        border: 3px solid #B9DDFB;
+        color: #138FF2;
+        font-weight: 500;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 0.2em;
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+    }
+
+        a.golink:hover {
+            color: #E3F2FD;
+        }
+
+            a.golink:hover:before {
+                top: 0;
+            }
+
+
+
+        a.golink:before {
+            content: "";
+            background: #138FF2;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: -100%;
+            left: 0;
+            transition: 0.3s;
+            z-index: -1;
+        }
+
+    div.notify {
+        color: #138FF2;
+        font-weight: 500;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+    }
+
+        div.notify:before {
+            color: white;
+        }
+
+        div.notify:hover {
+            color: #E3F2FD;
+            cursor: pointer;
+        }
+
+            div.notify:hover:before {
+                top: 0;
+            }
+
+    .codeview {
+        width: 400px;
+    }
+
+    pre {
+        white-space: break-spaces;
+        display: block;
+        overflow: hidden;
+    }
+</style>
+
+
+<div class="wrapper">
+    <div id="loaderSelf" class="loadingOnSubmit" style="display:none"></div>
+    <h1>
+        Oops!
+    </h1>
+    <h2>
+        You are not authorized to access this page!
+    </h2>
+
+    <br />
+    <div class="codeview">
+        <a class="golink" href="Feedback"> Contact Support </a><br />
+    </div>
+
+</div>
+<div class="space">
+    <img src="~/Content/Images/broken.png" />
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+

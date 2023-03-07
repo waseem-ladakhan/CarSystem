@@ -1,0 +1,58 @@
+﻿@model List<CarSystem.Models.myBooking> 
+    @{
+    ViewBag.Title = "myBookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+} 
+<h2>Showing My Booked Cars</h2>  
+<div id="us">@TempData["r"]</div> <div class="row" style="margin-top:100px">
+    @foreach (var item in Model)
+    {<div class="col-sm-4">
+            <div>
+                <div class="container" id="us">
+                    <div style="font-weight: bold; color: #a0d2eb;"><label>User Name:</label> @item.UserName</div>
+                    <div style="font-weight: bold; color: lightblue;"><label>RegistrationId:</label> @item.RegistrationId</div>
+                    <div style="font-weight: bold; color: lightblue;"><label>BookingId:</label> @item.BookingId</div>
+                    <div style="font-weight:bold; color: lightblue;"><label>startDate:</label> @item.startDate</div>
+
+                    <div style="font-weight:bold; color: lightblue;"><label>PickOff:</label> @item.PickOff</div>
+                    <div style="font-weight:bold; color: lightblue;"><label>DropOff:</label> @item.DropOff</div>
+                    <div style="font-weight:bold; color: lightblue;"><label>ReturnDate:</label> @item.ReturnDate</div>
+                    <div style="font-weight:bold; color: lightblue;"><label>bookingDate:</label> @item.bookingDate</div>
+                    
+                    <div>
+                        @Html.ActionLink("Pay Now", "Payment", new { bid = item.BookingId, startDate = item.startDate, returnDate = item.ReturnDate, regID = item.RegistrationId }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        </div>
+      } 
+</div> 
+
+<style>
+        h2 {
+                font-size: 24px;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 50px;
+
+    }
+
+         #us {
+                background-color: #f7f7f7;
+                border: 1px solid #ddd;
+                padding: 10px;
+                margin-bottom: 20px;
+
+    }
+
+             #us div {
+                    margin-bottom: 5px;
+
+    }
+
+             #us a {
+                    display: inline-block;
+                    margin-top: 10px;
+
+    }
+</style>

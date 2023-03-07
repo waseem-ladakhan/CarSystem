@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="632c6b5396014a1b843a2d2d36d701ae" Name="Diagram1">
+        <EntityTypeShape EntityType="CarProjectModel.Feedback" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarProjectModel.myBooking" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarProjectModel.Registration" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="CarProjectModel.FK__myBooking__UserN__3A81B327" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CarProjectModel.car" Width="1.5" PointX="0.75" PointY="9" />
+        <AssociationConnector Association="CarProjectModel.FK__myBooking__Regis__3B75D760" />
+        <EntityTypeShape EntityType="CarProjectModel.expectation" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CarProjectModel.Bank" Width="1.5" PointX="3" PointY="5.25" />
+        <AssociationConnector Association="CarProjectModel.FK__Bank__UserName__49C3F6B7" />
+        <EntityTypeShape EntityType="CarProjectModel.invoice" Width="1.5" PointX="3" PointY="8.875" />
+        <AssociationConnector Association="CarProjectModel.FK__invoice__Registr__46E78A0C" />
+        <AssociationConnector Association="CarProjectModel.FK__invoice__UserNam__45F365D3" />
+        <EntityTypeShape EntityType="CarProjectModel.Driver" Width="1.5" PointX="3" PointY="13.625" />
+        <AssociationConnector Association="CarProjectModel.FK__Drivers__Registr__787EE5A0" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

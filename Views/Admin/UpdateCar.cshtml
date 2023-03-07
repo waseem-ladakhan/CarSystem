@@ -1,0 +1,87 @@
+﻿@model CarSystem.Models.car
+
+@{
+    ViewBag.Title = "UpdateCar";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>UpdateCar</h2>
+
+
+<form method="post">
+    <div class="form-group">
+        <label>Registration Number:</label>
+        <input type="text" name="registration" value="@Request.QueryString["registration"]" class="form-control" readonly/>
+    </div>
+
+    <div class="form-group">
+        <label for="carName">Car Name:</label>
+        <input type="text" name="carName" value="@Request.QueryString["cname"]" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Model">Model Name:</label>
+        <input type="text" name="Model" value="@Request.QueryString["model"]" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Image">Image URL:</label>
+        <input type="text" name="Image" value="@Request.QueryString["image"]" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Color">Color:</label>
+        <input type="text" name="Color" value="@Request.QueryString["color"]" class="form-control" />
+    </div>
+
+    <label for="Conditioner">Conditioner:</label>
+
+    <div>
+        <input type="radio" name="Conditioner" value="@Request.QueryString["Condition"]">
+        <label>AC</label>
+    </div>
+
+    <div>
+        <input type="radio" name="Conditioner" value="@Request.QueryString["Condition"]">
+        <label>NON AC</label>
+    </div>
+    <label>Fuel Type:</label>
+
+    <div>
+        <input type="radio" name="fullType" value="@Request.QueryString["Type"]">
+        <label>Petrol</label>
+    </div>
+
+    <div>
+        <input type="radio" name="fullType" value="@Request.QueryString["Type"]">
+        <label>Diesel</label>
+    </div>
+    <div class="form-group">
+        <label for="rentPerday">Rent Per Day:</label>
+        <input type="number" name="RentPerDay" value="@Request.QueryString["RentPerDay"]" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="capacity">capacity of Members:</label>
+        <input type="number" name="capacity" value="@Request.QueryString["Capacity"]" class="form-control" />
+    </div>
+
+    <label for="Color">Status of the Car:</label>
+
+    <div>
+        <input type="radio" name="CarStatus" value="@Request.QueryString["status"]">
+        <label>Available</label>
+    </div>
+
+    <div>
+        <input type="radio" name="CarStatus" value="@Request.QueryString["status"]">
+        <label>Rented</label>
+    </div>
+
+    <input type="submit" value="Update" class="btn btn-default" />
+</form>
+<div style="background-color:orangered;color:yellow;font-weight:bold">
+    @ViewData["AddNewCar"]
+
+
+</div>
+

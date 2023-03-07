@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CarProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="AccountNumber" />
+          </Key>
+          <Property Name="AccountNumber" Type="int" Nullable="false" />
+          <Property Name="BankName" Type="varchar" MaxLength="20" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="BalanceAmount" Type="int" />
+          <Property Name="password" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="car">
+          <Key>
+            <PropertyRef Name="RegistrationId" />
+          </Key>
+          <Property Name="RegistrationId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="carName" Type="varchar" MaxLength="20" />
+          <Property Name="Model" Type="varchar" MaxLength="20" />
+          <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Color" Type="varchar" MaxLength="20" />
+          <Property Name="Conditioner" Type="bit" />
+          <Property Name="Fuletype" Type="bit" />
+          <Property Name="RentPerDay" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="capacity" Type="int" />
+          <Property Name="CarStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="DriverId" />
+          </Key>
+          <Property Name="DriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationId" Type="varchar" MaxLength="20" />
+          <Property Name="DriverName" Type="varchar" MaxLength="20" />
+          <Property Name="DriverPhoneNum" Type="bigint" />
+          <Property Name="LicenseDetails" Type="varchar" MaxLength="50" />
+          <Property Name="BookingID" Type="int" />
+        </EntityType>
+        <EntityType Name="expectation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="30" />
+          <Property Name="ExpectationMessage" Type="varchar" MaxLength="250" />
+          <Property Name="StackTrace" Type="varchar" MaxLength="250" />
+          <Property Name="dateLogedIn" Type="date" />
+          <Property Name="InnerException" Type="varchar" MaxLength="250" />
+          <Property Name="GetClassName" Type="varchar" MaxLength="250" />
+          <Property Name="URL" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedBackId" />
+          </Key>
+          <Property Name="FeedBackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="Ratings" Type="varchar" MaxLength="20" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="invoice">
+          <Key>
+            <PropertyRef Name="inoviceID" />
+          </Key>
+          <Property Name="inoviceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="RegistrationId" Type="varchar" MaxLength="20" />
+          <Property Name="startDate" Type="date" />
+          <Property Name="bookingDate" Type="date" />
+          <Property Name="ReturnDate" Type="date" />
+          <Property Name="RentPerDay" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="TotalAmmount" Type="int" />
+          <Property Name="BookingID" Type="int" />
+        </EntityType>
+        <EntityType Name="myBooking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="RegistrationId" Type="varchar" MaxLength="20" />
+          <Property Name="startDate" Type="date" />
+          <Property Name="bookingDate" Type="date" />
+          <Property Name="ReturnDate" Type="date" />
+          <Property Name="PickOff" Type="varchar" MaxLength="150" />
+          <Property Name="DropOff" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="phoneNumber" Type="bigint" />
+          <Property Name="password" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="20" />
+          <Property Name="Gender" Type="bit" />
+          <Property Name="Nationality" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Bank__UserName__49C3F6B7">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="0..1" />
+          <End Role="Bank" Type="Self.Bank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Bank">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Drivers__Registr__787EE5A0">
+          <End Role="car" Type="Self.car" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="car">
+              <PropertyRef Name="RegistrationId" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="RegistrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__Registr__46E78A0C">
+          <End Role="car" Type="Self.car" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="car">
+              <PropertyRef Name="RegistrationId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="RegistrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__UserNam__45F365D3">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__myBooking__Regis__3B75D760">
+          <End Role="car" Type="Self.car" Multiplicity="0..1" />
+          <End Role="myBooking" Type="Self.myBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="car">
+              <PropertyRef Name="RegistrationId" />
+            </Principal>
+            <Dependent Role="myBooking">
+              <PropertyRef Name="RegistrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__myBooking__UserN__3A81B327">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="0..1" />
+          <End Role="myBooking" Type="Self.myBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="myBooking">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarProjectModelStoreContainer">
+          <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="car" EntityType="Self.car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="expectation" EntityType="Self.expectation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoice" EntityType="Self.invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="myBooking" EntityType="Self.myBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Bank__UserName__49C3F6B7" Association="Self.FK__Bank__UserName__49C3F6B7">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="Bank" EntitySet="Bank" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Drivers__Registr__787EE5A0" Association="Self.FK__Drivers__Registr__787EE5A0">
+            <End Role="car" EntitySet="car" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__Registr__46E78A0C" Association="Self.FK__invoice__Registr__46E78A0C">
+            <End Role="car" EntitySet="car" />
+            <End Role="invoice" EntitySet="invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__UserNam__45F365D3" Association="Self.FK__invoice__UserNam__45F365D3">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="invoice" EntitySet="invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__myBooking__Regis__3B75D760" Association="Self.FK__myBooking__Regis__3B75D760">
+            <End Role="car" EntitySet="car" />
+            <End Role="myBooking" EntitySet="myBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__myBooking__UserN__3A81B327" Association="Self.FK__myBooking__UserN__3A81B327">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="myBooking" EntitySet="myBooking" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedBackId" />
+          </Key>
+          <Property Name="FeedBackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Ratings" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="myBooking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="startDate" Type="DateTime" Precision="0" />
+          <Property Name="bookingDate" Type="DateTime" Precision="0" />
+          <Property Name="ReturnDate" Type="DateTime" Precision="0" />
+          <Property Name="PickOff" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DropOff" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Registration" Relationship="Self.FK__myBooking__UserN__3A81B327" FromRole="myBooking" ToRole="Registration" />
+          <NavigationProperty Name="car" Relationship="CarProjectModel.FK__myBooking__Regis__3B75D760" FromRole="myBooking" ToRole="car" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="phoneNumber" Type="Int64" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="Nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="myBookings" Relationship="Self.FK__myBooking__UserN__3A81B327" FromRole="Registration" ToRole="myBooking" />
+          <NavigationProperty Name="Banks" Relationship="CarProjectModel.FK__Bank__UserName__49C3F6B7" FromRole="Registration" ToRole="Bank" />
+          <NavigationProperty Name="invoices" Relationship="CarProjectModel.FK__invoice__UserNam__45F365D3" FromRole="Registration" ToRole="invoice" />
+        </EntityType>
+        <Association Name="FK__myBooking__UserN__3A81B327">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="0..1" />
+          <End Role="myBooking" Type="Self.myBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="myBooking">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="myBookings" EntityType="Self.myBooking" />
+          <EntitySet Name="Registrations" EntityType="Self.Registration" />
+          <AssociationSet Name="FK__myBooking__UserN__3A81B327" Association="Self.FK__myBooking__UserN__3A81B327">
+            <End Role="Registration" EntitySet="Registrations" />
+            <End Role="myBooking" EntitySet="myBookings" />
+          </AssociationSet>
+          <EntitySet Name="cars" EntityType="CarProjectModel.car" />
+          <AssociationSet Name="FK__myBooking__Regis__3B75D760" Association="CarProjectModel.FK__myBooking__Regis__3B75D760">
+            <End Role="car" EntitySet="cars" />
+            <End Role="myBooking" EntitySet="myBookings" />
+          </AssociationSet>
+          <EntitySet Name="expectations" EntityType="CarProjectModel.expectation" />
+          <EntitySet Name="Banks" EntityType="CarProjectModel.Bank" />
+          <AssociationSet Name="FK__Bank__UserName__49C3F6B7" Association="CarProjectModel.FK__Bank__UserName__49C3F6B7">
+            <End Role="Registration" EntitySet="Registrations" />
+            <End Role="Bank" EntitySet="Banks" />
+          </AssociationSet>
+          <EntitySet Name="invoices" EntityType="CarProjectModel.invoice" />
+          <AssociationSet Name="FK__invoice__Registr__46E78A0C" Association="CarProjectModel.FK__invoice__Registr__46E78A0C">
+            <End Role="car" EntitySet="cars" />
+            <End Role="invoice" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__UserNam__45F365D3" Association="CarProjectModel.FK__invoice__UserNam__45F365D3">
+            <End Role="Registration" EntitySet="Registrations" />
+            <End Role="invoice" EntitySet="invoices" />
+          </AssociationSet>
+          <EntitySet Name="Drivers" EntityType="CarProjectModel.Driver" />
+          <AssociationSet Name="FK__Drivers__Registr__787EE5A0" Association="CarProjectModel.FK__Drivers__Registr__787EE5A0">
+            <End Role="car" EntitySet="cars" />
+            <End Role="Driver" EntitySet="Drivers" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="car">
+          <Key>
+            <PropertyRef Name="RegistrationId" />
+          </Key>
+          <Property Name="RegistrationId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="carName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Conditioner" Type="Boolean" />
+          <Property Name="Fuletype" Type="Boolean" />
+          <Property Name="RentPerDay" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="capacity" Type="Int32" />
+          <Property Name="CarStatus" Type="Boolean" />
+          <NavigationProperty Name="myBookings" Relationship="CarProjectModel.FK__myBooking__Regis__3B75D760" FromRole="car" ToRole="myBooking" />
+          <NavigationProperty Name="invoices" Relationship="CarProjectModel.FK__invoice__Registr__46E78A0C" FromRole="car" ToRole="invoice" />
+          <NavigationProperty Name="Drivers" Relationship="CarProjectModel.FK__Drivers__Registr__787EE5A0" FromRole="car" ToRole="Driver" />
+        </EntityType>
+        <Association Name="FK__myBooking__Regis__3B75D760">
+          <End Type="CarProjectModel.car" Role="car" Multiplicity="0..1" />
+          <End Type="CarProjectModel.myBooking" Role="myBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="car">
+              <PropertyRef Name="RegistrationId" />
+            </Principal>
+            <Dependent Role="myBooking">
+              <PropertyRef Name="RegistrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="expectation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ExpectationMessage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StackTrace" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="dateLogedIn" Type="DateTime" Precision="0" />
+          <Property Name="InnerException" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="GetClassName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="URL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="AccountNumber" />
+          </Key>
+          <Property Name="AccountNumber" Type="Int32" Nullable="false" />
+          <Property Name="BankName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BalanceAmount" Type="Int32" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Registration" Relationship="CarProjectModel.FK__Bank__UserName__49C3F6B7" FromRole="Bank" ToRole="Registration" />
+        </EntityType>
+        <Association Name="FK__Bank__UserName__49C3F6B7">
+          <End Type="CarProjectModel.Registration" Role="Registration" Multiplicity="0..1" />
+          <End Type="CarProjectModel.Bank" Role="Bank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Bank">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="invoice">
+          <Key>
+            <PropertyRef Name="inoviceID" />
+          </Key>
+          <Property Name="inoviceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="startDate" Type="DateTime" Precision="0" />
+          <Property Name="bookingDate" Type="DateTime" Precision="0" />
+          <Property Name="ReturnDate" Type="DateTime" Precision="0" />
+          <Property Name="RentPerDay" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="TotalAmmount" Type="Int32" />
+          <Property Name="BookingID" Type="Int32" />
+          <NavigationProperty Name="car" Relationship="CarProjectModel.FK__invoice__Registr__46E78A0C" FromRole="invoice" ToRole="car" />
+          <NavigationProperty Name="Registration" Relationship="CarProjectModel.FK__invoice__UserNam__45F365D3" FromRole="invoice" ToRole="Registration" />
+        </EntityType>
+        <Association Name="FK__invoice__Registr__46E78A0C">
+          <End Type="CarProjectModel.car" Role="car" Multiplicity="0..1" />
+          <End Type="CarProjectModel.invoice" Role="invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="car">
+              <PropertyRef Name="RegistrationId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="RegistrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__UserNam__45F365D3">
+          <End Type="CarProjectModel.Registration" Role="Registration" Multiplicity="0..1" />
+          <End Type="CarProjectModel.invoice" Role="invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="DriverId" />
+          </Key>
+          <Property Name="DriverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DriverName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DriverPhoneNum" Type="Int64" />
+          <Property Name="LicenseDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BookingID" Type="Int32" />
+          <NavigationProperty Name="car" Relationship="CarProjectModel.FK__Drivers__Registr__787EE5A0" FromRole="Driver" ToRole="car" />
+        </EntityType>
+        <Association Name="FK__Drivers__Registr__787EE5A0">
+          <End Type="CarProjectModel.car" Role="car" Multiplicity="0..1" />
+          <End Type="CarProjectModel.Driver" Role="Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="car">
+              <PropertyRef Name="RegistrationId" />
+            </Principal>
+            <Dependent Role="Driver">
+              <PropertyRef Name="RegistrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarProjectModelStoreContainer" CdmEntityContainer="CarProjectEntities">
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="CarProjectModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="FeedBackId" ColumnName="FeedBackId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Ratings" ColumnName="Ratings" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="myBookings">
+            <EntityTypeMapping TypeName="CarProjectModel.myBooking">
+              <MappingFragment StoreEntitySet="myBooking">
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="PickOff" ColumnName="PickOff" />
+                <ScalarProperty Name="DropOff" ColumnName="DropOff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="CarProjectModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cars">
+            <EntityTypeMapping TypeName="CarProjectModel.car">
+              <MappingFragment StoreEntitySet="car">
+                <ScalarProperty Name="CarStatus" ColumnName="CarStatus" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="RentPerDay" ColumnName="RentPerDay" />
+                <ScalarProperty Name="Fuletype" ColumnName="Fuletype" />
+                <ScalarProperty Name="Conditioner" ColumnName="Conditioner" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="carName" ColumnName="carName" />
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="expectations">
+            <EntityTypeMapping TypeName="CarProjectModel.expectation">
+              <MappingFragment StoreEntitySet="expectation">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="GetClassName" ColumnName="GetClassName" />
+                <ScalarProperty Name="InnerException" ColumnName="InnerException" />
+                <ScalarProperty Name="dateLogedIn" ColumnName="dateLogedIn" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="ExpectationMessage" ColumnName="ExpectationMessage" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="CarProjectModel.Bank">
+              <MappingFragment StoreEntitySet="Bank">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoices">
+            <EntityTypeMapping TypeName="CarProjectModel.invoice">
+              <MappingFragment StoreEntitySet="invoice">
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="TotalAmmount" ColumnName="TotalAmmount" />
+                <ScalarProperty Name="RentPerDay" ColumnName="RentPerDay" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="inoviceID" ColumnName="inoviceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="CarProjectModel.Driver">
+              <MappingFragment StoreEntitySet="Drivers">
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="LicenseDetails" ColumnName="LicenseDetails" />
+                <ScalarProperty Name="DriverPhoneNum" ColumnName="DriverPhoneNum" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

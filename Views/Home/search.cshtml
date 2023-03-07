@@ -1,0 +1,99 @@
+﻿@model List<CarSystem.Models.car>
+@{
+    ViewBag.Title = "search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="Nam">
+    <h2 id="se">search</h2>
+    @{ int c = 0; int d = 0;}
+    <div class="row" style="margin-top:100px">
+        @if (Model.Count == 0)
+        {
+            <div>Records Not Found</div>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                c = c + 1;
+                d = d + 1;
+                <div>The Count of Cars:@Model.Count()</div>
+                <div class="col-sm-4" id="bx">
+                    <div class="card">
+                        <img src=~/@item.Image height="200" width="200">
+                        <div class="container">
+                            @*<div>@item.Image</div>*@<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                            <div> @item.RegistrationId</div>
+                            <div> @item.carName</div>
+                            <div>@item.Model</div>
+                            <div>@item.Color</div>
+                            @if (item.Conditioner == true)
+                            {
+                                <div>Conditioner:AC</div>
+                            }
+                            else
+                            {
+                                <div>Conditioner:Non AC</div>
+                            }
+                            @*<div>@item.Conditioner</div>*@<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                            @if (item.Fuletype == true)
+                            {
+                                <div>FuelType:Petrol</div>
+                            }
+                            else
+                            {
+                                <div>FuelType:Diesel</div>
+                            }
+                            @*<div>@item.Fuletype</div>*@<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                            <div>@item.RentPerDay</div>
+                            <div>Capacity:@item.capacity</div>
+                            @if (item.CarStatus == true)
+                            {
+                                <div>CarStatus:Available</div>
+                            }
+                            else
+                            {
+                                <div>CarStatus:Not Available</div>
+                            }
+                            @*<div>@item.CarStatus</div>*@<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                            <div>
+                                @Html.ActionLink("Book Now", "mybooking", new { carname = item.carName }, new { @class = "btn btn-primary", onclick = "this.href += '&qt=' + document.getElementById(" + @c + ").value;" })
+
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<style>
+    #Nam {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: auto;
+        height: auto;
+    }
+
+    #se {
+        width: 300px;
+        border: thin groove groove;
+        padding: 10px;
+        margin: 5px;
+    }
+
+    #bx {
+        width: 300px;
+        border: thin groove groove;
+        padding: 10px;
+        margin: 5px;
+    }
+</style>
+
+
+
+

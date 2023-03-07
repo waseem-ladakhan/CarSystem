@@ -1,0 +1,58 @@
+﻿@model List<CarSystem.Models.myBooking>
+@{
+    ViewBag.Title = "SearchByDate";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>SearchByDate</h2>
+
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        margin-bottom: 30px;
+        border-radius: 10px;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    .container {
+        padding: 2px 16px;
+    }
+</style>
+
+<script src="~/scripts/jquery.js"></script>
+
+<h2>Menu</h2>
+<link href="~/styles/bootstrap.css" rel="stylesheet" />
+
+
+
+
+@TempData["r"]
+<div class="row" style="margin-top:100px">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+
+            <div class="card">
+                <div class="container">
+
+                    <div>Booking ID: @item.BookingId</div>
+                    <div>User Name:@item.UserName</div>
+                    <div>Registration Id: @item.RegistrationId</div>
+                    <div>start Date:@item.startDate</div>
+                    <div>booking Date:@item.bookingDate</div>
+                    <div>Return Date:@item.ReturnDate</div>
+                    <div>Pick Off:@item.PickOff</div>
+                    <div>Drop Off:@item.DropOff</div>
+                    
+                </div>
+            </div>
+        </div>
+
+    }

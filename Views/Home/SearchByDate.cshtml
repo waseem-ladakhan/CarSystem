@@ -1,0 +1,57 @@
+﻿@model  IEnumerable<CarSystem.Controllers.HomeController.carJoin>
+@{
+    ViewBag.Title = "SearchByDate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SearchByDate</h2>
+
+
+
+@{ int c = 0; int d = 0;}
+<form method="get" action="showbydate">
+    <div class="form-group">
+        <label for="showbydate">Select the Date</label>
+        <input type="date" name="date" class="form-control" />
+        <input type="submit" value="Search" />
+    </div>
+    @foreach (var item in Model)
+    {
+       
+        <div class="col-sm-4">
+                <div class="card">
+                    <img src="~/@item.cars.Image" height="200" width="200">
+                    <div class="container">
+                        <div>Car Name: @item.cars.carName</div><div>Colour:@item.cars.Color</div><div>Price per day: @item.cars.RentPerDay</div>
+                        @if (item.cars.Conditioner == true)
+                        {<div>
+                                Conditioner: AC
+                            </div>
+                        }
+                        else
+                        {<div>Conditioner:Non- AC</div>
+                        }
+                        @if (item.cars.Fuletype == true)
+                        {<div>FuelType:Petrol</div>
+                        }
+                        else
+                        {<div>FuelType:Diesel</div>
+                        }<div>Capacity:@item.cars.capacity</div>
+                        @if (item.cars.CarStatus == true)
+                        {<div>CarStatus:Available</div>
+                        }
+                        else
+                        {<div>CarStatus:Not Available</div>
+                        }<div>Vehicle Number:@item.cars.RegistrationId</div>
+                        @*@Html.ActionLink("Search", "SearchByDate", new { onclick = "this.href += '&fromDate=' + document.getElementById(" + @fromDate + ").value += '&toDate=' + document.getElementById(" + @toDate + ").value;", @class = "btn btn-primary" })*@                 <!--</div>-->
+                    </div>
+                </div>
+            </div>
+      
+    }
+</form><div>@ViewBag.msg</div><div>
+    @ViewBag.ms
+</div>
+    }
+
+

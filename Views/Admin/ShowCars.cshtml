@@ -1,0 +1,95 @@
+﻿@model List<CarSystem.Models.car>
+@{
+    ViewBag.Title = "ShowCars";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>ShowCars</h2>
+
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        margin-bottom: 30px;
+        border-radius: 10px;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    .container {
+        padding: 2px 16px;
+    }
+</style>
+
+<script src="~/scripts/jquery.js"></script>
+
+<h2>Menu</h2>
+<link href="~/styles/bootstrap.css" rel="stylesheet" />
+
+
+
+
+@TempData["r"]
+@*<form method="get" action="SearchByDate">
+    <div class="form-group">
+        <label for="startDate">Select Date:</label>
+        <input type="date" name="fromDate" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="startDate">Select Date:</label>
+        <input type="date" name="toDate" class="form-control" />
+    </div>
+
+    <input type="submit" value="Search" />
+</form>*@
+<div class="row" style="margin-top:100px">
+
+
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+
+            <div class="card">
+                <img src="~/@item.Image" height="200" width="200">
+                <div class="container">
+
+                    <div>Car Name: @item.carName</div>
+                    <div>Colour:@item.Color</div>
+                    <div>Price per day: @item.RentPerDay</div>
+                    <div>AC or Non AC:@item.Conditioner</div>
+                    <div>Fuel Type:@item.Fuletype</div>
+                    <div>Capacity:@item.capacity</div>
+                    <div>Status of the Car:@item.CarStatus</div>
+                    <div>Vehicle Number:@item.RegistrationId</div>
+                    <div>
+                        @Html.ActionLink("Update", "UpdateCar", new
+                        {@*cid = item.carid*@
+cname = item.carName,
+RentPerDay = item.RentPerDay,
+Condition = item.Conditioner,
+Type = item.Fuletype,
+image = item.Image,
+Capacity = item.capacity,
+registration = item.RegistrationId,
+status = item.CarStatus,
+model = item.Model,
+color = item.Color
+},
+new { @class = "btn btn-primary" })
+                        <div>
+                            @Html.ActionLink("Delete", "DeleteCar", new { carID = item.RegistrationId }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }

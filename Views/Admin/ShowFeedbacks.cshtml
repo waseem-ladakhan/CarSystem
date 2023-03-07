@@ -1,0 +1,126 @@
+﻿@model List<CarSystem.Models.Feedback>
+@{
+    ViewBag.Title = "ShowFeedbacks";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Showing All the Feedbacks</h2>
+<div id="Grid">
+    <table id="t01">
+        <thead>
+            <th>Feedback ID</th>
+            <th>User Name</th>
+            <th> Car RegistrationId</th>
+            <th>Ratings</th>
+            <th>Description</th>
+        
+        </thead>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @item.FeedBackId
+                </td>
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+                    @item.Ratings
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                
+            </tr>
+
+        }
+
+    </table>
+</div>
+
+@*<div id="Grid">
+        <table cellpadding="5" cellspacing="0" style="border: 1px solid #ccc;font-size: 9pt;">
+            <tr>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">inoviceID</th>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">UserName</th>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">RegistrationId</th>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">startDate</th>
+
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">bookingDate</th>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">ReturnDate</th>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">RentPerDay</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width:120px;border: 1px solid #ccc">@item.inoviceID</td>
+                    <td style="width:120px;border: 1px solid #ccc">@item.UserName</td>
+                    <td style="width:120px;border: 1px solid #ccc">@item.RegistrationId</td>
+                    <td style="width:120px;border: 1px solid #ccc">@item.startDate</td>
+
+
+                    <td style="width:120px;border: 1px solid #ccc">@item.bookingDate</td>
+                    <td style="width:120px;border: 1px solid #ccc">@item.ReturnDate</td>
+                    <td style="width:120px;border: 1px solid #ccc">@item.RentPerDay</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <br />
+    <br />
+
+
+
+    @using (Html.BeginForm("invoice", "Home", FormMethod.Post))
+    {
+        <input type="hidden" name="GridHtml" />
+        <input type="submit" id="btnSubmit" value="Export" />
+    }
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                $("input[name='GridHtml']").val($("#Grid").html());
+            });
+        });
+    </script>
+*@
+
+<style>
+    table#t01 {
+        width: 100%;
+        background-color: #f1f1c1;
+    }
+
+        table#t01 tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table#t01 tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        table#t01 th {
+            color: white;
+            background-color: blue;
+        }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 15px;
+    }
+</style>
