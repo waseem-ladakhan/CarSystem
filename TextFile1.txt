@@ -1,0 +1,170 @@
+﻿CREATE TABLE car (
+  car_id int identity(1,1) PRIMARY KEY,
+  Car_Name VARCHAR(255),
+  Colour varchar(20),
+  images VARCHAR(MAX),
+  price DECIMAL(10,2),
+  AirConditioner varchar(20) Check (AirConditioner in ('AC', 'NON AC')),
+  Fuletype varchar(20) check (Fuletype in('Petrol', 'Diesel', 'Gas')),
+  capacity tinyint,
+  car_status  varchar(20) Check (car_status in ('Available', 'Rented' )),
+  Registration varchar(20)
+);
+alter table car
+alter column car_id int
+
+drop table car
+
+select * from car
+insert into  car values('Vauxhall Corsa', 'Black', 'image', 12000, 'AC', 'Petrol', 4, 'Available', 'KA02TA1022')
+
+CREATE TABLE mybooking (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  user_name varchar(255),
+  car_id int,
+  booking_date DATE,
+  return_date DATE,
+  Number_of_cars_booked int,
+  Payment int,
+  Cancel bit,
+  PickUp varchar(20),
+  DropOff varchar(20),
+  FOREIGN KEY (user_name) REFERENCES registration(username),
+  FOREIGN KEY (car_id) REFERENCES car(car_id)
+); 
+
+
+select * from mybooking
+
+insert into mybooking values('waseem', 1, '2022-12-12', '2022-12-1', 2, 1200, 0, 'dwd', 'dwd')
+insert into mybooking values('rushi s', 2, '2022-11-21', '2022-12-12', 1, 1300, 0, 'dwd1', 'dwd1')
+insert into mybooking values('rahul', 1, '2022-12-12', '2022-12-1', 2, 1200, 0, 'dwd', 'dwd')
+insert into mybooking values('shubash', 1, '2022-12-12', '2022-12-1', 2, 1200, 0, 'dwd', 'dwd')
+insert into mybooking values('Sangeetha', 1, '2022-12-12', '2022-12-1', 2, 1200, 0, 'dwd', 'dwd')
+insert into mybooking values('david', 1, '2022-12-12', '2022-12-1', 2, 1200, 0, 'dwd', 'dwd')
+insert into mybooking values('anvesh', 1, '2022-12-12', '2022-12-1', 2, 1200, 0, 'dwd', 'dwd')
+insert into mybooking values('abilash', 1, '2022-12-12', '2022-12-1', 2, 1200, 0, 'dwd', 'dwd')
+
+alter table mybooking
+alter column car_id int
+
+CREATE TABLE feedback (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  user_name varchar(255),
+  feedback_text TEXT,
+  FOREIGN KEY (user_name) REFERENCES registration(username)
+); 
+
+CREATE TABLE bankaccount (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  bank_name VARCHAR(20),
+  user_name varchar(255),
+  account_number VARCHAR(20),
+  Balance_amount int,
+  FOREIGN KEY (user_name) REFERENCES registration(username)
+); 
+
+create table Drivers(
+DriverId int PRIMARY KEY identity(1,1) ,
+car_id int,
+DriverName varchar(20),
+DriverPhoneNum bigint,
+LicenseDetails varchar(50),
+foreign key (car_id) references car(car_id)
+)	
+
+drop table drivers
+alter table Drivers
+alter column car_id int
+
+
+
+
+
+Select * from Drivers
+drop table Drivers
+insert into Drivers values(1,'waseem', 12312313, 12312312, 0)
+
+delete from Drivers where car_id = 1
+
+CREATE TABLE registration (
+  id INT IDENTITY(1,1),
+  username VARCHAR(255) primary key,
+  password VARCHAR(255) NOT NULL,
+  gender VARCHAR(10) NOT NULL,
+  age INT NOT NULL,
+  Dob date,
+  Phone_num int ,
+  Address varchar(20) not null,
+  nationality VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+);  
+insert into registration values('waseem', 'waseem@123', 1, 23, '1992-01-02', 78909878, 'hanchinal', 'india', 'waseem@gmail.com');
+insert into registration values('waseemL', 'waseem@123', 1, 23, '1992-01-02', 78909878, 'hanchinal', 'india', 'waseem@gmail.com');
+
+
+alter table registration
+alter column username VARCHAR(255) not null;
+
+alter table registration
+add CONSTRAINT check_nationality  Check (nationality in('india', 'UK','US'));
+
+select * from registration
+alter table drivers
+add  Gender bit
+
+
+
+
+alter
+
+alter table registration
+alter column gender bit not null;
+
+
+
+
+
+
+select * from registration
+select * from car
+select * from mybooking
+select * from feedback
+select * from bankaccount
+select * from drivers
+
+alter table drivers
+add Gender varchar(50)
+
+
+use carrental
+create database carrental
+
+drop database carrental
+
+
+select * from registration
+
+
+drop table expectation
+create table expectation
+(
+Id int IDENTITY(1,1) PRIMARY KEY,
+uname varchar(30),
+ExpectationMessage varchar(250),
+StackTrace varchar(250),
+dateLogedIn date,
+InnerException varchar(250),
+GetClassName varchar(250),
+GetBaseException varchar(250)
+
+)
+
+
+select * from expectation
+
+
+
+drop table mybooking
+drop table car
+drop table drivers
