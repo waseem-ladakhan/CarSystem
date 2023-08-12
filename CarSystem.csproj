@@ -276,6 +276,7 @@
     <Content Include="Views\Admin\ShowFeedbacks.cshtml" />
     <Content Include="Views\Home\SearchByDate.cshtml" />
     <Content Include="Views\Home\UserProfile.cshtml" />
+    <Content Include="Views\Shared\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

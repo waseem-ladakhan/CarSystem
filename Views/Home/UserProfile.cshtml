@@ -1,8 +1,143 @@
-﻿
+﻿@model  CarSystem.Models.Registration
 @{
     ViewBag.Title = "UserProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>UserProfile</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div id="One">
+        <div class="form-group" id="1">
+            <label>Your Name</label>
+            @*@Html.LabelFor(model => model.UserName)*@
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="form-group" id="2">
+            <label>Password</label>
+            @*@Html.LabelFor(model => model.password)*@
+            @Html.PasswordFor(model => model.password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.password)
+        </div>
+
+        <div class="form-group" id="3">
+            <label></label>
+            @Html.LabelFor(model => model.Gender)
+            Male @Html.RadioButtonFor(model => model.Gender, true)
+            Female @Html.RadioButtonFor(model => model.Gender, false)
+
+            @*@Html.LabelFor(model => model.gender)
+                @Html.RadioButtonFor(model => model.gender, "Male") Male
+                @Html.RadioButtonFor(model => model.gender, "Female") Female
+                @Html.ValidationMessageFor(model => model.gender)*@
+        </div>
+        <div class="form-group" id="5">
+            @*@Html.LabelFor(model => model.DOB)*@
+            @Html.LabelFor(model => model.DOB)
+            @Html.TextBoxFor(model => model.DOB, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DOB)
+        </div>
+
+        <div class="form-group" id="6">
+            <label>Phone Number</label>
+            @*@Html.LabelFor(model => model.phoneNumber)*@
+            @Html.TextBoxFor(model => model.phoneNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.phoneNumber)
+        </div>
+
+        <div class="form-group" id="7">
+            @Html.LabelFor(model => model.Address)
+            @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="form-group" id="8">
+            @Html.LabelFor(model => model.Nationality)
+            @Html.TextBoxFor(model => model.Nationality, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Nationality)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </div>
+}
+@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+{
+    <div class="alert alert-success">
+        @ViewBag.SuccessMessage
+    </div>
+}
+
+
+<div style="background-color:orangered;color:yellow;font-weight:bold">
+    @ViewData["reg"]
+</div>
+<style>
+    <style >
+    #One {
+        margin: auto;
+        width: 50%;
+        border: 1px solid black;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .form-group {
+        text-align: center;
+    }
+
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        /*  border: 1px solid #ccc;
+    padding: 20px;
+           border-radius: 4px;*/
+    }
+
+    h1 {
+        background-color: aqua;
+        color: chocolate;
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+</style>
+
+
+
 

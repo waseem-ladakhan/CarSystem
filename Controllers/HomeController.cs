@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 
 using System.Web;
 using System.Web.Mvc;
@@ -32,9 +33,13 @@ namespace CarSystem.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+            WebClient we = new WebClient();
+ /*       https://ajax.microsoft.com/ajax/jQuery/jquery-1.8.0.js
+*/
+            
             return View();
         }
+        
         public ActionResult Login()
         {
             return View();
@@ -165,7 +170,7 @@ namespace CarSystem.Controllers
                           cars = t,
                           myBooking = t1
                       };
-            return View(res.ToList());
+            return View("Vehicles", res.ToList());
         }
     
         public class carssjoin
@@ -230,13 +235,14 @@ namespace CarSystem.Controllers
         {
             if (Session["u"] == null)
             {
+               
                 return View("Login");
             }
             return View();
         }
         [HttpPost]
         public ActionResult Feedback(FormCollection f)
-        {
+        {   
             try
             {
                 Feedback ob = new Feedback();
@@ -273,9 +279,9 @@ namespace CarSystem.Controllers
                 return View("Login");
             }
             string username = Session["u"].ToString();
-            Registration user = db.Registrations.FirstOrDefault(u => u.UserName == username);
+            var res = (from t in db.Registrations where t.UserName == username select t).ToList();
             
-            return View(user);
+            return View(res);
             
         }
         [HttpPost]
